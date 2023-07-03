@@ -1,0 +1,33 @@
+---
+name: CI
+
+on:
+  schedule:
+    - cron: "50 7 * * *"
+  workflow_dispatch:
+
+jobs:
+    steps:
+      - name: Checkout the repository
+        uses: actions/checkout@v3
+
+      - uses: dtolnay/rust-toolchain@v1
+        with:
+          target: riscv32imc-unknown-none-elf
+          toolchain: nightly
+          components: rust-src
+
+      - uses: Swatinem/rust-cache@v1
+
+      - name: build
+        run: cargo +nightly build --release
+
+      - name: Wokwi CI check (nostd)
+        uses: wokwi/wokwi-ci-action@v1
+        with:
+          token: ${{ secrets.WOKWI_CLI_TOKEN }}
+          path: .
+          timeout: 2000
+          expect_text: 'Oscillator Activated'
+          fail_text: 'Error'
+

@@ -1,0 +1,33 @@
+{
+    "version": 1,
+    "author": "Anonymous maker",
+    "editor": "wokwi",
+    "parts": [
+      {
+        "type": "board-esp32-c3-devkitm-1",
+        "id": "esp",
+        "top": -158.18,
+        "left": 98.13,
+        "attrs": { "builder": "rust-nostd-esp" }
+      },
+      {
+        "type": "wokwi-ds1307",
+        "id": "rtc1",
+        "top": -115.46,
+        "left": -129.93,
+        "rotate": 180,
+        "attrs": {}
+      }
+    ],
+    "connections": [
+      [ "esp:TX", "$serialMonitor:RX", "", [] ],
+      [ "esp:RX", "$serialMonitor:TX", "", [] ],
+      [ "rtc1:5V", "esp:5V.2", "red", [ "h45.93", "v26.39" ] ],
+      [ "rtc1:GND", "esp:GND.5", "black", [ "h37.5", "v26.83" ] ],
+      [ "rtc1:SCL", "esp:2", "green", [ "h64.8", "v-48.47" ] ],
+      [ "rtc1:SDA", "esp:3", "green", [ "h74.13", "v-47.31" ] ]
+    ],
+    "serialMonitor": { "display": "terminal" },
+    "dependencies": {}
+  }
+  
