@@ -7,6 +7,7 @@ on:
   workflow_dispatch:
 
 jobs:
+  ci:
     steps:
       - name: Checkout the repository
         uses: actions/checkout@v3
